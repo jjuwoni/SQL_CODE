@@ -91,6 +91,31 @@ select weekday('2020-12-25'),
 
 select STR_TO_DATE('49/10/11', '%y/%m/%d');
 
-select point as '평점'
+select round(avg(point), 1) as '평점'
 from tb_grade
-where student_no = 'A51718';
+where student_no = 'A517178';
+
+select department_no as '학과번호', count(*) as '학생수(명)'
+from tb_student
+group by department_no;
+
+select count(*)
+from tb_student
+where coach_professor_no is null;
+
+select substr((term_no), 1, 4) as '년도', round(avg(point), 1) as '년도별 평점'
+from tb_grade
+where student_no = 'A112113'
+group by substr((term_no),1, 4);
+
+select department_no as '학과코드명', sum(case when absence_yn = 'Y' then 1 else 0 end) as '휴학생 수'
+from tb_student
+group by department_no;
+
+select student_name as '동일이름', count(*) as '동명인 수'
+from tb_student
+where 
+group by student_name;
+
+
+
